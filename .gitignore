@@ -1,0 +1,21 @@
+# Node modules
+Front/node_modules/
+Back/node_modules/
+
+# Env files
+Front/client/.env
+Back/.env
+
+# Build
+Front/.next/
+Front/out/
+Back/dist/
+Back/build/
+
+# Logs
+**/logs
+*.log
+
+# OS/IDE
+.DS_Store
+.vscode/
