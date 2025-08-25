@@ -53,6 +53,7 @@ const Dashboard: React.FC = () => {
                         <AddBookForm
                             onSuccess={handleAddSuccess}
                             onCancel={handleCancel}
+                            book={editingBook}
                         />
                     </div>
                 ) : (

@@ -11,6 +11,7 @@ interface FormInputProps {
     type?: string;
     register: UseFormRegister<any>;
     errors: FieldErrors<any>;
+    id?: string;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -21,6 +22,7 @@ const FormInput: React.FC<FormInputProps> = ({
     type,
     register,
     errors,
+    id,
 }) => {
     return (
         <div>
@@ -40,6 +42,7 @@ const FormInput: React.FC<FormInputProps> = ({
                         label={label}
                         type={type || 'text'}
                         fullWidth
+                        id={id || field}
                         margin="normal"
                         {...register(name)}
                         error={!!errors[name]}

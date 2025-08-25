@@ -1,23 +1,28 @@
 "use client";
 import React, { useEffect } from 'react';
-import { fetchBooks, selectBooks, selectBooksLoading, selectBooksError } from '../../../store/slices/bookSlice';
+import { fetchBooks, fetchAllBooks, selectBooks, selectBooksLoading, selectBooksError } from '../../../store/slices/bookSlice';
 import BookCard from './BookCard';
 import { Book } from '../../../types/book';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 interface BookListProps {
     onEditBook?: (book: Book) => void;
+    publicView?: boolean;
 }
 
-const BookList: React.FC<BookListProps> = ({ onEditBook }) => {
+const BookList: React.FC<BookListProps> = ({ onEditBook, publicView = false }) => {
     const dispatch = useAppDispatch();
     const books = useAppSelector(selectBooks);
     const loading = useAppSelector(selectBooksLoading);
     const error = useAppSelector(selectBooksError);
 
     useEffect(() => {
-        dispatch(fetchBooks());
-    }, [dispatch]);
+        if (publicView) {
+            dispatch(fetchAllBooks());
+        } else {
+            dispatch(fetchBooks());
+        }
+    }, [dispatch, publicView]);
 
     if (loading) {
         return (
@@ -58,6 +63,7 @@ const BookList: React.FC<BookListProps> = ({ onEditBook }) => {
                     key={book._id}
                     book={book}
                     onEdit={onEditBook}
+                    showActions={!publicView}
                 />
             ))}
         </div>

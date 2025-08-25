@@ -17,6 +17,13 @@ export const fetchBooks = createAsyncThunk(
         return response;
     }
 );
+export const fetchAllBooks = createAsyncThunk(
+    'books/fetchAllBooks',
+    async () => {
+        const response = await bookApi.getAllBooks();
+        return response;
+    }
+);
 
 export const fetchBook = createAsyncThunk(
     'books/fetchBook',
@@ -78,6 +85,21 @@ const bookSlice = createSlice({
             .addCase(fetchBooks.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message || 'Failed to fetch books';
+            });
+
+        // Fetch all public books
+        builder
+            .addCase(fetchAllBooks.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchAllBooks.fulfilled, (state, action) => {
+                state.loading = false;
+                state.books = action.payload;
+            })
+            .addCase(fetchAllBooks.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || 'Failed to fetch all books';
             });
 
         // Fetch single book

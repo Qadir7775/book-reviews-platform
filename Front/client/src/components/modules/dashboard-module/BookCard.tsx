@@ -10,9 +10,10 @@ import Image from 'next/image';
 interface BookCardProps {
     book: Book;
     onEdit?: (book: Book) => void;
+    showActions?: boolean;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ book, onEdit }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, onEdit, showActions = true }) => {
     const dispatch = useAppDispatch();
     const { token } = useSelector(selectAuth);
 
@@ -65,20 +66,22 @@ const BookCard: React.FC<BookCardProps> = ({ book, onEdit }) => {
                     Added on {new Date(book.createdAt).toLocaleDateString()}
                 </div>
 
-                <div className="flex gap-2 pt-2">
-                    <button
-                        onClick={handleEdit}
-                        className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
-                    >
-                        Edit
-                    </button>
-                    <button
-                        onClick={handleDelete}
-                        className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
-                    >
-                        Delete
-                    </button>
-                </div>
+                {showActions && (
+                    <div className="flex gap-2 pt-2">
+                        <button
+                            onClick={handleEdit}
+                            className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            onClick={handleDelete}
+                            className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );

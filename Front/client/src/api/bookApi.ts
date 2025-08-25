@@ -3,6 +3,19 @@ import { Book } from '../types/book';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const bookApi = {
+    // Public: get all books
+    getAllBooks: async (): Promise<Book[]> => {
+        const response = await fetch(`${API_BASE_URL}/api/books`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch all books');
+        }
+        return response.json();
+    },
+
     getBooks: async (): Promise<Book[]> => {
         const token = localStorage.getItem("token");
         const response = await fetch(`${API_BASE_URL}/api/books/my`, {
