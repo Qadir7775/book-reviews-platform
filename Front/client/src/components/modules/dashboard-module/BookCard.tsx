@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from '../../../store/slices/authSlice';
 import { useAppDispatch } from '@/store/hooks';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface BookCardProps {
     book: Book;
@@ -66,22 +67,30 @@ const BookCard: React.FC<BookCardProps> = ({ book, onEdit, showActions = true })
                     Added on {new Date(book.createdAt).toLocaleDateString()}
                 </div>
 
-                {showActions && (
-                    <div className="flex gap-2 pt-2">
-                        <button
-                            onClick={handleEdit}
-                            className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
-                        >
-                            Edit
-                        </button>
-                        <button
-                            onClick={handleDelete}
-                            className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
-                        >
-                            Delete
-                        </button>
-                    </div>
-                )}
+                <div className="flex gap-2 pt-2">
+                    <Link
+                        href={`/books/${book._id}`}
+                        className="px-3 py-1 bg-gray-100 text-gray-900 text-sm rounded hover:bg-gray-200 transition-colors"
+                    >
+                        View
+                    </Link>
+                    {showActions && (
+                        <>
+                            <button
+                                onClick={handleEdit}
+                                className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+                            >
+                                Edit
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
+                            >
+                                Delete
+                            </button>
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );

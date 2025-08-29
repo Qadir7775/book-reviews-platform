@@ -9,6 +9,7 @@ import FormInput from "@/components/customs/inputs/FormInput";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/store/slices/authSlice";
 import { registerfetch } from "@/api/authApi";
+import { useRouter } from "next/navigation";
 
 
 type SignUpFormData = z.infer<typeof signupSchema>;
@@ -22,6 +23,7 @@ const SignupForm = () => {
         resolver: zodResolver(signupSchema),
     });
     const dispatch = useDispatch();
+    const routes = useRouter();
 
     const onSubmit = async (data: SignUpFormData) => {
         try {
@@ -29,6 +31,7 @@ const SignupForm = () => {
             console.log("registerdata");
 
             dispatch(loginSuccess(registerdata));
+            routes.push("/auth/signin");
         } catch (err) {
             console.error(err);
         }

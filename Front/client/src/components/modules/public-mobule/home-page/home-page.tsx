@@ -40,6 +40,14 @@ const HomePage: React.FC = () => {
                             </div>
                             <h3 className="text-xl font-semibold text-gray-900 mb-2">Manage Your Library</h3>
                             <p className="text-gray-600">Keep track of all your books in one organized place</p>
+                            <div className="mt-4">
+                                <Link
+                                    href="/books"
+                                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
+                                >
+                                    Browse Books
+                                </Link>
+                            </div>
                         </div>
                     </div>
 
